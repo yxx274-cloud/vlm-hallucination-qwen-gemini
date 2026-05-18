@@ -42,6 +42,10 @@ python demo/run_vlm_multimodel_batch.py \
 
 可用模型：`gemini-2.5-pro` `gemini-2.5-flash` `claude-opus-4-7` `gpt-4o` `o3`
 
+## 金融专用模型（XuanYuan-FinX1 / FinLLaVA）
+
+需要 GPU 服务器本地部署，详见 [docs/zhixingyun_guide.md](docs/zhixingyun_guide.md)。
+
 ## 结果
 
 - `demo/outputs/multimodel/` — trimodal baseline

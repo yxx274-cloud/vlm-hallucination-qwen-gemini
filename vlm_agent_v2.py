@@ -81,8 +81,9 @@ VLM_PROVIDERS = {
             "deepseek-v4-pro":          "deepseek-ai/deepseek-v4-pro",
         },
     },
-    # 导师本地部署（vLLM / LMDeploy 等 OpenAI 兼容服务）
+    # 本地部署（vLLM / LMDeploy 等 OpenAI 兼容服务）
     # base_url 占位，实际由 runner --api-base 参数覆盖
+    # 所有 local_* provider 均不需要 API key
     "qwen_local": {
         "base_url": "http://localhost:8000/v1",
         "env_key": "QWEN_LOCAL_API_KEY",
@@ -90,6 +91,25 @@ VLM_PROVIDERS = {
             "qwen3-vl-2b": "Qwen/Qwen3-VL-2B-Instruct",
             "qwen3-vl-4b": "Qwen/Qwen3-VL-4B-Instruct",
             "qwen3-vl-8b": "Qwen/Qwen3-VL-8B-Instruct",
+        },
+    },
+    # 金融专用模型（智星云 RTX 4090 本地部署）
+    "xuanyuan_local": {
+        "base_url": "http://localhost:8000/v1",
+        "env_key": "XUANYUAN_LOCAL_API_KEY",
+        "model_aliases": {
+            # XuanYuan-FinX1 系列（fp16，需 ~16GB 显存）
+            "xuanyuan-finx1-8b":  "Duxiaoman-FL/XuanYuan-FinX1-8B-Instruct",
+            "xuanyuan-finx1-72b": "Duxiaoman-FL/XuanYuan-FinX1-72B-Instruct",
+        },
+    },
+    "finllava_local": {
+        "base_url": "http://localhost:8001/v1",
+        "env_key": "FINLLAVA_LOCAL_API_KEY",
+        "model_aliases": {
+            # FinLLaVA 13B（AWQ 4-bit，需 ~10GB 显存）
+            "finllava-13b":     "SALT-NLP/FinLLaVA",
+            "finllava-13b-awq": "SALT-NLP/FinLLaVA-AWQ",
         },
     },
     # 云雾 AI 中转（OpenAI 兼容，支持 Gemini / Claude / GPT 等）
@@ -128,9 +148,9 @@ def _get_client(provider, api_key=None, api_base=None):
                 key = LLM_API_KEY
             except ImportError:
                 pass
-        # qwen_local 等本地部署可以不鉴权，用占位 key
+        # *_local 本地部署均不需要鉴权，用占位 key
         if not key:
-            if provider in ("qwen_local",):
+            if provider.endswith("_local"):
                 key = "EMPTY"
             else:
                 raise ValueError(
