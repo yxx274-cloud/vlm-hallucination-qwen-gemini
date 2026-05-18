@@ -80,8 +80,8 @@ DEFAULT_MODELS = [
 
 
 def has_provider_credentials(provider: str):
-    # qwen_local 本地部署不需要 key，直接放行
-    if provider == "qwen_local":
+    # 所有 *_local provider 本地部署不需要 key，直接放行
+    if provider.endswith("_local"):
         return True
     env_key = VLM_PROVIDERS.get(provider, {}).get("env_key")
     if not env_key:

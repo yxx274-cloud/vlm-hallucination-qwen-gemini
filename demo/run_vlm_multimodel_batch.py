@@ -105,14 +105,9 @@ def parse_args():
     p.add_argument("--sleep", type=float, default=1.0)
     p.add_argument("--max-retries", type=int, default=5)
     p.add_argument("--stocks-file", default="", help="可选：每行一个 ts_code，否则用 STOCKS_HS300")
-    p.add_argument(
-        "--api-base",
-        default=None,
-        help="覆盖 provider base_url（qwen_local 等本地部署必传，例如 http://localhost:8000/v1）",
-    )
-    p.add_argument("--seed", type=int, default=20230630, help="随机种子，透传给 API")
-    p.add_argument("--api-base", default=None, help="覆盖 provider 默认 base_url（用于 qwen_local 等本地部署）")
+    p.add_argument("--api-base", default=None, help="覆盖 provider base_url（qwen_local 等本地部署必传，例如 http://localhost:8000/v1）")
     p.add_argument("--api-key", default=None, help="覆盖 provider 默认 API key（用于 yunwu 等中转服务）")
+    p.add_argument("--seed", type=int, default=20230630, help="随机种子，透传给 API")
     return p.parse_args()
 
 

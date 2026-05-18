@@ -98,18 +98,18 @@ VLM_PROVIDERS = {
         "base_url": "http://localhost:8000/v1",
         "env_key": "XUANYUAN_LOCAL_API_KEY",
         "model_aliases": {
-            # XuanYuan-FinX1 系列（fp16，需 ~16GB 显存）
-            "xuanyuan-finx1-8b":  "Duxiaoman-FL/XuanYuan-FinX1-8B-Instruct",
-            "xuanyuan-finx1-72b": "Duxiaoman-FL/XuanYuan-FinX1-72B-Instruct",
+            # XuanYuan-13B-Chat（fp16 ~26GB / 4-bit ~13GB）
+            "xuanyuan-13b": "Duxiaoman-DI/XuanYuan-13B-Chat",
+            # XuanYuan-6B（fp16 ~12GB，显存充裕）
+            "xuanyuan-6b":  "Duxiaoman-DI/XuanYuan-6B-Chat",
         },
     },
     "finllava_local": {
         "base_url": "http://localhost:8001/v1",
         "env_key": "FINLLAVA_LOCAL_API_KEY",
         "model_aliases": {
-            # FinLLaVA 13B（AWQ 4-bit，需 ~10GB 显存）
-            "finllava-13b":     "SALT-NLP/FinLLaVA",
-            "finllava-13b-awq": "SALT-NLP/FinLLaVA-AWQ",
+            # FinLLaVA 8B（TheFinAI/FinLLaVA，llava_llama 架构，bf16 ~16GB）
+            "finllava-8b": "TheFinAI/FinLLaVA",
         },
     },
     # 云雾 AI 中转（OpenAI 兼容，支持 Gemini / Claude / GPT 等）
